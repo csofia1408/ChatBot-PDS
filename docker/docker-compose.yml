@@ -1,0 +1,25 @@
+services:
+  server:
+    image: ghcr.io/chroma-core/chroma:latest
+    restart: always
+    hostname: chroma-server
+    container_name: chroma-vector-server
+    environment:
+      - IS_PERSISTENT=TRUE
+      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]
+    volumes:
+      - chroma-data:/chroma/chroma/
+    ports:
+      - 1000:8000
+    networks:
+      - EAFIT
+
+networks:
+  EAFIT:
+    driver: bridge
+
+volumes:
+  chroma-data:
+    driver: local
+
+name: eafit
